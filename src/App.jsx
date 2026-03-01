@@ -295,8 +295,11 @@ export default function App(){
     const newMsgs=[...msgs,{role:"user",content:text}];
     setMsgs(newMsgs);setInput("");setLoading(true);
     try{
-      const res=await fetch("https://api.anthropic.com/v1/messages",{method:"POST",headers:{"Content-Type":"application/json"},
-        body:JSON.stringify({model:"claude-sonnet-4-20250514",max_tokens:1000,system:SYSTEM,messages:newMsgs})});
+  const res = await fetch("/api/anthropic", {
+  method: "POST",
+  headers: { "Content-Type": "application/json" },
+  body: JSON.stringify({ model: "claude-sonnet-4-20250514", max_tokens: 1000, system: SYSTEM, messages: newMsgs })
+});
       const data=await res.json();
       const raw=data.content?.[0]?.text||"{}";
       let json;
@@ -331,7 +334,7 @@ export default function App(){
       }else{
         setMsgs([...newMsgs,{role:"assistant",content:json.domanda||"Dimmi di più."}]);
       }
-    }catch{setMsgs([...newMsgs,{role:"assistant",content:"Errore, riprova."}]);}
+    }catch(e){setMsgs([...newMsgs,{role:"assistant",content:"Errore, riprova."}]);}
     setLoading(false);
   };
 
@@ -793,6 +796,9 @@ const st={
   header:{display:"flex",alignItems:"center",justifyContent:"space-between",padding:"14px 28px",borderBottom:"1px solid #c8b89a",background:"#f5f0e8",position:"sticky",top:0,zIndex:10,flexWrap:"wrap",gap:"10px"},
   logo:{display:"flex",alignItems:"center",gap:"10px",cursor:"pointer"},
   logoMark:{fontSize:"20px",color:"#2d6a4f"},
+};
+
+export default App;
   logoText:{fontSize:"15px",fontWeight:"700",letterSpacing:"0.08em",textTransform:"uppercase"},
   tagline:{fontSize:"10px",color:"#999",letterSpacing:"0.05em",fontStyle:"italic"},
   modeTabs:{display:"flex",background:"#ede8e0",borderRadius:"20px",padding:"3px",gap:"2px"},
