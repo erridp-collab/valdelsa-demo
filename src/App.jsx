@@ -679,7 +679,7 @@ export default function App(){
       {/* ══ DETAIL ══ */}
       {phase==="detail"&&selected&&(
         <main style={st.mainD}>
-          <button style={st.backBtn} onClick={()=>history.back?setPhase(results.length?"results":"catalog"):setPhase("results")}>← Torna ai risultati</button>
+          <button style={st.backBtn} onClick={()=>setPhase(results.length?"results":"catalog")}>← Torna ai risultati</button>
           <div style={st.dGrid}>
             <div style={st.dLeft}>
               <div style={st.dHead}>
@@ -776,7 +776,7 @@ export default function App(){
               <div style={st.bookBox}>
                 <p style={{fontSize:"17px",fontWeight:"600",margin:0}}>Sei interessato?</p>
                 <p style={{fontSize:"12px",opacity:0.8,lineHeight:"1.6",margin:0}}>Verifica disponibilità, scegli le esperienze e prenota.</p>
-                <button style={st.bookBtn}>Simula prenotazione →</button>
+                <button style={st.bookBtn} onClick={()=>alert(`Prenotazione per ${selected.name} - Questo è un demo`)}>Simula prenotazione →</button>
                 <p style={{fontSize:"9px",opacity:0.45,textAlign:"center",margin:0,fontStyle:"italic"}}>[ Demo · nessuna prenotazione reale ]</p>
               </div>
             </div>
